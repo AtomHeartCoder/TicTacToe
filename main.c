@@ -359,7 +359,7 @@ int main(void)
                         node = node->next[i];
                         break;
                     }
-                if ( node->depth != 9 ) {
+                if ( node->depth != 9 && node->next[0] != NULL ) {
                     node = search(node);
                     Sleep(800);
                     transform(board, node->board);
