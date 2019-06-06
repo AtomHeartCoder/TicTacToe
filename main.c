@@ -28,7 +28,7 @@ NODE *open[MAXLIST], *close[MAXLIST];
 int judge(char a[][SIZE], char b[][SIZE])
 {
     int i, j, mode, sign;
-    for ( mode = 1, sign = 0; mode <= 7; mode++ ) {
+    for ( mode = 1, sign = 0; mode <= 8; mode++ ) {
         if ( sign )
             break;
         for ( i = 0, sign = 1; sign && i < SIZE; i++ )
@@ -60,6 +60,10 @@ int judge(char a[][SIZE], char b[][SIZE])
                         break;
                     case 7:
                         if ( b[SIZE - 1 - i][j] != a[i][j] ) // up-to-down
+                            sign = 0;
+                        break;
+                    case 8:
+                        if ( b[i][j] != a[i][j] ) // normal
                             sign = 0;
                         break;
                 }
@@ -195,7 +199,7 @@ void transform(char a[][SIZE], char b[][SIZE])
 {
     int i, j, x = 0, y = 0, mode, count, find, sign;
     char c;
-    for ( mode = 1, find = 0; !find && mode <= 7; mode++ ) {
+    for ( mode = 1, find = 0; !find && mode <= 8; mode++ ) {
         for ( i = 0, count = 0, sign = 1; sign && i < SIZE; i++ )
             for ( j = 0; sign && j < SIZE; j++ ) {
                 switch ( mode ) {
@@ -248,6 +252,13 @@ void transform(char a[][SIZE], char b[][SIZE])
                             count++;
                         }
                         break;
+                    case 8:
+                        if ( b[i][j] != a[i][j] ) { // normal
+                            x = i, y = j;
+                            c = b[i][j];
+                            count++;
+                        }
+                        break;
                 }
                 if ( count > 1 )
                     sign = 0;
@@ -292,13 +303,13 @@ int main(void)
         else
             continue;
         system("cls");
-        printf("©°©¤©¤©¤©Ð©¤©¤©¤©Ð©¤©¤©¤©´\n");
-        printf("©¦   ©¦   ©¦   ©¦\n");
-        printf("©À©¤©¤©¤©à©¤©¤©¤©à©¤©¤©¤©È\n");
-        printf("©¦   ©¦   ©¦   ©¦\n");
-        printf("©À©¤©¤©¤©à©¤©¤©¤©à©¤©¤©¤©È\n");
-        printf("©¦   ©¦   ©¦   ©¦\n");
-        printf("©¸©¤©¤©¤©Ø©¤©¤©¤©Ø©¤©¤©¤©¼\n\n\n\n");
+        printf("åºšå²¸å²¸å²¸æˆ¿å²¸å²¸å²¸æˆ¿å²¸å²¸å²¸åº–\n");
+        printf("å²«   å²«   å²«   å²«\n");
+        printf("å¿µå²¸å²¸å²¸æ‹ˆå²¸å²¸å²¸æ‹ˆå²¸å²¸å²¸æ€•\n");
+        printf("å²«   å²«   å²«   å²«\n");
+        printf("å¿µå²¸å²¸å²¸æ‹ˆå²¸å²¸å²¸æ‹ˆå²¸å²¸å²¸æ€•\n");
+        printf("å²«   å²«   å²«   å²«\n");
+        printf("å¼©å²¸å²¸å²¸æ‹‚å²¸å²¸å²¸æ‹‚å²¸å²¸å²¸å½¼\n\n\n\n");
         printf(" Move by w/a/s/d, place by space.");
         node = close[0];
         if ( mode == 2 ) {
